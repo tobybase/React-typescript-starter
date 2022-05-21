@@ -1,4 +1,4 @@
-export interface addProperty {
+export interface AddProperty {
   id: number;
   toAdd: string;
   isDone: boolean;

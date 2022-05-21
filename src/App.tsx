@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import './App.css';
 import InputField from './components/InputField';
-import { addProperty } from './models/models';
+import ToAddList from './components/ToAddList';
+import { AddProperty } from './models/models';
 
 function App() {
   const [toAdd, setToAdd] = useState<string>('');
-  const [toAdds, setToAdds] = useState<addProperty[]>([]);
+  const [toAdds, setToAdds] = useState<AddProperty[]>([]);
 
   const handleAdd = (event: React.FormEvent) => {
     event.preventDefault();
@@ -16,12 +17,13 @@ function App() {
     }
   };
 
-  console.log(toAdds);
+  // console.log(toAdds);
 
   return (
     <div className='App'>
       <span className='heading'>Note</span>
       <InputField toAdd={toAdd} setToAdd={setToAdd} handleAdd={handleAdd} />
+      <ToAddList toAdds={toAdds} setToAdds={setToAdds} />
     </div>
   );
 }
