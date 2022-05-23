@@ -17,8 +17,6 @@ function App() {
     }
   };
 
-  // console.log(toAdds);
-
   return (
     <div className='App'>
       <span className='heading'>Note</span>

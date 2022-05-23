@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AddProperty } from '../models/models';
 import { AiOutlineEdit, AiFillDelete } from 'react-icons/ai';
 import { MdDone } from 'react-icons/md';
@@ -11,7 +11,7 @@ type Props = {
 };
 
 const NoteItem = ({ item, toAdds, setToAdds }: Props) => {
-  const [edit, setEdit] = useState<Boolean>(false);
+  const [edit, setEdit] = useState<boolean>(false);
   const [editToAdd, setEditToAdd] = useState<string>(item.toAdd);
 
   const handleDone = (id: number) => {
@@ -28,14 +28,19 @@ const NoteItem = ({ item, toAdds, setToAdds }: Props) => {
 
   const handleEdit = (event: React.FormEvent, id: number) => {
     event.preventDefault();
-
     setToAdds(
       toAdds.map((item) =>
-        item.id === id ? { ...item, item: editToAdd } : item
+        item.id === id ? { ...item, items: editToAdd } : item
       )
     );
     setEdit(false);
   };
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [edit]);
 
   return (
     <form
@@ -45,7 +50,8 @@ const NoteItem = ({ item, toAdds, setToAdds }: Props) => {
         <input
           value={editToAdd}
           onChange={(event) => setEditToAdd(event.target.value)}
-          className='items__single--test'
+          className='items__single--text'
+          ref={inputRef}
         />
       ) : item.isDone ? (
         <s className='items__single--text'>{item.toAdd}</s>
