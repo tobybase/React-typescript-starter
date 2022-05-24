@@ -4,18 +4,18 @@ import NoteItem from './NoteItem';
 
 import './style.css';
 
-interface Props {
+interface props {
   toAdds: AddProperty[];
   setToAdds: React.Dispatch<React.SetStateAction<AddProperty[]>>;
 }
 
-const ToAddList = ({ toAdds, setToAdds }: Props) => {
+const ToAddList: React.FC<props> = ({ toAdds, setToAdds }) => {
   return (
     <div className='items'>
-      {toAdds.map((items) => (
+      {toAdds?.map((item) => (
         <NoteItem
-          key={items.id}
-          item={items}
+          key={item.id}
+          item={item}
           toAdds={toAdds}
           setToAdds={setToAdds}
         />

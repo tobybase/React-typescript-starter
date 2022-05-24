@@ -7,7 +7,7 @@ interface Props {
   handleAdd: (event: React.FormEvent) => void;
 }
 
-const InputField = ({ toAdd, setToAdd, handleAdd }: Props) => {
+const InputField: React.FC<Props> = ({ toAdd, setToAdd, handleAdd }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (

@@ -4,15 +4,24 @@ import { AiOutlineEdit, AiFillDelete } from 'react-icons/ai';
 import { MdDone } from 'react-icons/md';
 import './style.css';
 
-type Props = {
+// type Props = {
+//   item: AddProperty;
+//   toAdds: AddProperty[];
+//   setToAdds: React.Dispatch<React.SetStateAction<AddProperty[]>>;
+// };
+
+const NoteItem: React.FC<{
   item: AddProperty;
   toAdds: AddProperty[];
   setToAdds: React.Dispatch<React.SetStateAction<AddProperty[]>>;
-};
-
-const NoteItem = ({ item, toAdds, setToAdds }: Props) => {
+}> = ({ item, toAdds, setToAdds }) => {
   const [edit, setEdit] = useState<boolean>(false);
   const [editToAdd, setEditToAdd] = useState<string>(item.toAdd);
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [edit]);
 
   const handleDone = (id: number) => {
     setToAdds(
@@ -30,17 +39,11 @@ const NoteItem = ({ item, toAdds, setToAdds }: Props) => {
     event.preventDefault();
     setToAdds(
       toAdds.map((item) =>
-        item.id === id ? { ...item, items: editToAdd } : item
+        item.id === id ? { ...item, item: editToAdd } : item
       )
     );
     setEdit(false);
   };
-
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, [edit]);
 
   return (
     <form
@@ -58,7 +61,6 @@ const NoteItem = ({ item, toAdds, setToAdds }: Props) => {
       ) : (
         <span className='items__single--text'>{item.toAdd}</span>
       )}
-
       <div>
         <span
           className='icon'

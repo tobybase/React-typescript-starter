@@ -4,7 +4,7 @@ import InputField from './components/InputField';
 import ToAddList from './components/ToAddList';
 import { AddProperty } from './models/models';
 
-function App() {
+const App: React.FC = () => {
   const [toAdd, setToAdd] = useState<string>('');
   const [toAdds, setToAdds] = useState<AddProperty[]>([]);
 
@@ -24,6 +24,6 @@ function App() {
       <ToAddList toAdds={toAdds} setToAdds={setToAdds} />
     </div>
   );
-}
+};
 
 export default App;
