@@ -39,7 +39,7 @@ const NoteItem: React.FC<{
     event.preventDefault();
     setToAdds(
       toAdds.map((item) =>
-        item.id === id ? { ...item, item: editToAdd } : item
+        item.id === id ? { ...item, toAdd: editToAdd } : item
       )
     );
     setEdit(false);
